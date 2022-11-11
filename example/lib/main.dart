@@ -6,6 +6,7 @@ import 'pages/custom-styles.page.dart';
 import 'pages/custom-toolbar.page.dart';
 import 'pages/delete-markers.page.dart';
 import 'pages/delta-sandbox.page.dart';
+import 'pages/embeds.page.dart';
 import 'pages/headings.page.dart';
 import 'pages/hide-markers-by-type.page.dart';
 import 'pages/highlights.page.dart';
@@ -53,6 +54,7 @@ class DemoApp extends StatelessWidget {
         '/delta-sandbox': (context) => DeltaSandbox(),
         '/overwrite-controller': (context) => OverwriteControllerPage(),
         '/add-elements': (context) => AddElementsPage(),
+        '/embeds': (context) => EmbedsPage(),
       },
     );
   }
