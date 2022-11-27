@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 
 import '../../controller/models/paste-style.model.dart';
+import '../../embeds/models/embeddable-video.model.dart';
 import '../../markers/models/marker.model.dart';
 import '../../rules/controllers/rules.controller.dart';
 import '../../rules/models/rule-type.enum.dart';
@@ -14,10 +15,9 @@ import 'delta/delta-changes.model.dart';
 import 'delta/delta.model.dart';
 import 'delta/operation.model.dart';
 import 'history.model.dart';
-import 'nodes/block-embed.model.dart';
 import 'nodes/block.model.dart';
 import 'nodes/child-query.model.dart';
-import 'nodes/embeddable.model.dart';
+import 'nodes/embeddable-object.model.dart';
 import 'nodes/leaf.model.dart';
 import 'nodes/line.model.dart';
 import 'nodes/revert-operations.model.dart';
@@ -84,9 +84,9 @@ class DocumentM {
   // Returns an instance of DeltaM actually composed into this document.
   DeltaM insert(int index, Object? data, {int replaceLength = 0}) {
     assert(index >= 0);
-    assert(data is String || data is EmbeddableM);
+    assert(data is String || data is EmbeddableObjectM);
 
-    if (data is EmbeddableM) {
+    if (data is EmbeddableObjectM) {
       data = data.toJson();
     } else if ((data as String).isEmpty) {
       return DeltaM();
@@ -132,7 +132,7 @@ class DocumentM {
   // Returns an instance of DeltaM actually composed into this document.
   DeltaM replace(int index, int len, Object? data) {
     assert(index >= 0);
-    assert(data is String || data is EmbeddableM);
+    assert(data is String || data is EmbeddableObjectM);
 
     final dataIsNotEmpty = (data is String) ? data.isNotEmpty : true;
 
@@ -407,17 +407,15 @@ class DocumentM {
   }
 
   // Data is normalized (converted to models) before inserting into the document.
-  // Ensures that any embedded objects are converted into EmbeddableObject type when new content is added to the document.
+  // Ensures that any embedded objects are converted into EmbeddableObjectM type when new content is added to the document.
   Object _normalize(Object? data) {
     if (data is String) {
       return data;
-    }
-
-    if (data is EmbeddableM) {
+    } else if (data is EmbeddableObjectM) {
       return data;
     }
 
-    return EmbeddableM.fromJson(data as Map<String, dynamic>);
+    return EmbeddableObjectM.fromObject(data);
   }
 
   static DeltaM _transform(DeltaM delta) {
@@ -427,7 +425,7 @@ class DocumentM {
     for (var i = 0; i < ops.length; i++) {
       final op = ops[i];
       res.push(op);
-      _autoAppendNewlineAfterEmbeddable(i, ops, op, res, BlockEmbedM.videoType);
+      _autoAppendNewlineAfterEmbeddable(i, ops, op, res, EmbeddableVideoM.videoKey);
     }
 
     return res;

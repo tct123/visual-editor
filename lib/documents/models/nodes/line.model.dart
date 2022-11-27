@@ -11,7 +11,7 @@ import '../style.model.dart';
 import 'block.model.dart';
 import 'container.model.dart';
 import 'embed.model.dart';
-import 'embeddable.model.dart';
+import 'embeddable-object.model.dart';
 import 'leaf.model.dart';
 import 'node.model.dart';
 import 'text.model.dart';
@@ -84,7 +84,7 @@ class LineM extends ContainerM<LeafM?> {
 
   @override
   void insert(int index, Object data, StyleM? style) {
-    if (data is EmbeddableM) {
+    if (data is EmbeddableObjectM) {
       // We do not check whether this line already has any children here as inserting an embed
       // into a line with other text is acceptable from the Delta format perspective.
       // We rely on heuristic rules to ensure that embeds occupy an entire line.

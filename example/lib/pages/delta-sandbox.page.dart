@@ -3,9 +3,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:visual_editor/embeds/widgets/default-embed-builders.dart';
 import 'package:visual_editor/visual-editor.dart';
 
 import '../const/dimensions.const.dart';
+import '../models/custom-widget-embed-builder.model.dart';
+import '../models/embeddable-custom-widget.model.dart';
 import '../widgets/demo-page-scaffold.dart';
 
 // Here you can test any change in the editor and see the delta document output that is generated.
@@ -141,6 +144,11 @@ class _DeltaSandboxState extends State<DeltaSandbox> {
               left: 15,
               right: 15,
             ),
+            // +++ REMOVE
+            embedBuilders: [
+              ...defaultEmbedBuilders,
+              CustomWidgetEmbedBuilderM(),
+            ],
           ),
         ),
       );
@@ -153,6 +161,22 @@ class _DeltaSandboxState extends State<DeltaSandbox> {
         iconTheme: EditorIconThemeM(
           iconUnselectedFillColor: Colors.white,
         ),
+        customIcons: [
+          _insertEmbed(),
+        ],
+      );
+
+  // +++ REMOVE
+  EditorCustomButtonM _insertEmbed() => EditorCustomButtonM(
+        icon: Icons.star,
+        onTap: () {
+          final embed = EmbeddableCustomWidgetM();
+
+          _editorController.document.insert(
+            _editorController.selection.start,
+            embed,
+          );
+        },
       );
 
   // === UTILS ===

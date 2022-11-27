@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'pages/add-elements.page.dart';
 import 'pages/all-styles.page.dart';
+
+import 'pages/custom-embeds.page.dart';
 import 'pages/custom-styles.page.dart';
 import 'pages/custom-toolbar.page.dart';
 import 'pages/delete-markers.page.dart';
@@ -53,6 +55,7 @@ class DemoApp extends StatelessWidget {
         '/delta-sandbox': (context) => DeltaSandbox(),
         '/overwrite-controller': (context) => OverwriteControllerPage(),
         '/add-elements': (context) => AddElementsPage(),
+        '/custom-embeds': (context) => CustomEmbedsPage(),
       },
     );
   }

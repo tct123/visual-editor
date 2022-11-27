@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../controller/controllers/editor-controller.dart';
-import '../../documents/models/nodes/block-embed.model.dart';
 import '../../shared/translations/toolbar.i18n.dart';
 import '../../shared/utils/platform.utils.dart';
 import '../../toolbar/models/media-pick.enum.dart';
 import '../../toolbar/models/media-picker.type.dart';
+import '../models/embeddable-image.model.dart';
+import '../models/embeddable-video.model.dart';
 
 class ImageVideoUtils {
   static Future<MediaPickSettingE?> selectMediaPickSetting(
@@ -78,7 +79,7 @@ class ImageVideoUtils {
     }
 
     if (imageUrl != null) {
-      controller.replaceText(index, length, BlockEmbedM.image(imageUrl), null);
+      controller.replaceText(index, length, EmbeddableImageM(imageUrl), null);
     }
   }
 
@@ -110,7 +111,7 @@ class ImageVideoUtils {
     }
 
     if (videoUrl != null) {
-      controller.replaceText(index, length, BlockEmbedM.video(videoUrl), null);
+      controller.replaceText(index, length, EmbeddableVideoM(videoUrl), null);
     }
   }
 

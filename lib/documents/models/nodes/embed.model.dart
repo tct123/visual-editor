@@ -17,13 +17,13 @@ class EmbedM extends LeafM {
   static const kObjectReplacementCharacter = '\uFFFC';
   static const kObjectReplacementInt = 65532;
   
-  EmbedM(EmbeddableM data) : super.val(data);
+  EmbedM(EmbeddableObjectM data) : super.val(data);
 
   @override
   NodeM newInstance() => throw UnimplementedError();
 
   @override
-  EmbeddableM get value => super.value as EmbeddableM;
+  EmbeddableObjectM get value => super.value as EmbeddableObjectM;
 
   // Embed nodes are represented as unicode object replacement character in plain text.
   @override

@@ -5,8 +5,8 @@ import 'package:flutter/services.dart';
 import '../../controller/services/editor-text.service.dart';
 import '../../cursor/services/cursor.service.dart';
 import '../../documents/models/attributes/styling-attributes.dart';
-import '../../documents/models/nodes/block-embed.model.dart';
-import '../../embeds/services/image.utils.dart';
+import '../../embeds/models/embeddable-image.model.dart';
+import '../../embeds/services/embed.utils.dart';
 import '../../selection/services/selection-actions.service.dart';
 import '../../shared/state/editor.state.dart';
 
@@ -15,6 +15,7 @@ class ClipboardService {
   final _selectionActionsService = SelectionActionsService();
   final _editorTextService = EditorTextService();
   final _cursorService = CursorService();
+  final _embedUtils = EmbedUtils();
 
   static final _instance = ClipboardService._privateConstructor();
 
@@ -134,13 +135,13 @@ class ClipboardService {
       controller.replaceText(
         index,
         length,
-        BlockEmbedM.image(copied.imageUrl),
+        EmbeddableImageM(copied.imageUrl),
         null,
       );
 
       if (copied.style.isNotEmpty) {
         controller.formatText(
-          getImageNode(controller, index + 1).offset,
+          _embedUtils.getEmbedNode(controller, index + 1).offset,
           1,
           StyleAttributeM(copied.style),
         );

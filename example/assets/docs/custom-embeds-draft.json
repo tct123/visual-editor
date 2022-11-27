@@ -1,0 +1,146 @@
+[
+  {
+    "insert": "Custom embeds"
+  },
+  {
+    "insert": "\n",
+    "attributes": {
+      "header": 1
+    }
+  },
+  {
+    "insert": "\nFor non-text content such as images or formulas, the insert key can be an object. The object should have one key, which will be used to determine its type. All embeds have a length of one. [ "
+  },
+  {
+    "insert": "https://quilljs.com/docs/delta/",
+    "attributes": {
+      "link": "https://quilljs.com/docs/delta/"
+    }
+  },
+  {
+    "insert": " ]\n\nStandard embeds"
+  },
+  {
+    "insert": "\n",
+    "attributes": {
+      "header": 2
+    }
+  },
+  {
+    "insert": "Embeddable objects already present in the VisualEditor can be rendered without extra configuration: images and videos.\n\nCustom Embeds"
+  },
+  {
+    "insert": "\n",
+    "attributes": {
+      "header": 2
+    }
+  },
+  {
+    "insert": "Embeds that are defined by the user and provided to the editor using "
+  },
+  {
+    "insert": "EditorConfigM",
+    "attributes": {
+      "code": true
+    }
+  },
+  {
+    "insert": " when creating "
+  },
+  {
+    "insert": "VisualEditor",
+    "attributes": {
+      "code": true
+    }
+  },
+  {
+    "insert": ".\n\nVisualEditor("
+  },
+  {
+    "insert": "\n",
+    "attributes": {
+      "code-block": true
+    }
+  },
+  {
+    "insert": "          // additional setup"
+  },
+  {
+    "insert": "\n",
+    "attributes": {
+      "code-block": true
+    }
+  },
+  {
+    "insert": "          config: EditorConfigM("
+  },
+  {
+    "insert": "\n",
+    "attributes": {
+      "code-block": true
+    }
+  },
+  {
+    "insert": "            // additional setup"
+  },
+  {
+    "insert": "\n",
+    "attributes": {
+      "code-block": true
+    }
+  },
+  {
+    "insert": "            embedBuilders: ["
+  },
+  {
+    "insert": "\n",
+    "attributes": {
+      "code-block": true
+    }
+  },
+  {
+    "insert": "              ...defaultEmbedBuilders,"
+  },
+  {
+    "insert": "\n",
+    "attributes": {
+      "code-block": true
+    }
+  },
+  {
+    "insert": "              CustomWidgetEmbedBuilderM(),    // <-- Your custom embed builder"
+  },
+  {
+    "insert": "\n",
+    "attributes": {
+      "code-block": true
+    }
+  },
+  {
+    "insert": "            ],"
+  },
+  {
+    "insert": "\n",
+    "attributes": {
+      "code-block": true
+    }
+  },
+  {
+    "insert": "          ),"
+  },
+  {
+    "insert": "\n",
+    "attributes": {
+      "code-block": true
+    }
+  },
+  {
+    "insert": ");"
+  },
+  {
+    "insert": "\n",
+    "attributes": {
+      "code-block": true
+    }
+  }
+]

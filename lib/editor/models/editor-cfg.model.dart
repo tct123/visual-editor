@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../blocks/models/custom-builders.type.dart';
 import '../../blocks/models/editor-styles.model.dart';
 import '../../blocks/models/link-action.picker.type.dart';
 import '../../blocks/services/default-link-action-picker-delegate.utils.dart';
-import '../../embeds/widgets/default-embed-builder.dart';
+import '../../documents/models/attribute.model.dart';
+import '../../embeds/models/embed-builder.model.dart';
+import '../../embeds/widgets/default-embed-builders.dart';
 import '../../shared/state/editor.state.dart';
 
 // When instantiating a new Visual Editor, developers can control several styling and behaviour options.
@@ -116,15 +117,18 @@ class EditorConfigM {
   // Returns whether gesture is handled
   final bool Function(
     LongPressEndDetails details,
-    TextPosition Function(Offset offset, EditorState state),
+    TextPosition Function(
+      Offset offset,
+      EditorState state,
+    ),
   )? onSingleLongTapEnd;
 
   // Renders custom content to be displayed as provided by the client apps.
   // Custom embeds don't work as editable text, they are standalone blocks of content that have their own internal behaviour.
-  final EmbedBuilder? embedBuilder;
+  final Iterable<EmbedBuilderM> embedBuilders;
 
   // Styles can be provided to customize the look and feel of the Visual Editor using custom attributes.
-  final CustomStyleBuilder? customStyleBuilder;
+  final TextStyle Function(AttributeM attribute)? customStyleBuilder;
 
   // The locale to use for the editor buttons, defaults to system locale.
   final Locale? locale;
@@ -168,6 +172,7 @@ class EditorConfigM {
     this.textCapitalization = TextCapitalization.sentences,
     this.keyboardAppearance = Brightness.light,
     this.scrollPhysics,
+    this.embedBuilders = defaultEmbedBuilders,
     // TODO Why not have all of them in one place?
     this.onLaunchUrl,
     this.onTapDown,
@@ -175,7 +180,6 @@ class EditorConfigM {
     this.onSingleLongTapStart,
     this.onSingleLongTapMoveUpdate,
     this.onSingleLongTapEnd,
-    this.embedBuilder = defaultEmbedBuilder,
     this.linkActionPickerDelegate = defaultLinkActionPickerDelegate,
     this.customStyleBuilder,
     this.locale,

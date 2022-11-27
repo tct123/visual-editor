@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import '../delta/delta.model.dart';
 import '../style.model.dart';
 import 'embed.model.dart';
-import 'embeddable.model.dart';
+import 'embeddable-object.model.dart';
 import 'line.model.dart';
 import 'node.model.dart';
 import 'text.model.dart';
@@ -12,7 +12,7 @@ import 'text.model.dart';
 abstract class LeafM extends NodeM {
   // Creates a new [Leaf] with specified [data].
   factory LeafM(Object data) {
-    if (data is EmbeddableM) {
+    if (data is EmbeddableObjectM) {
       return EmbedM(data);
     }
 
@@ -55,7 +55,7 @@ abstract class LeafM extends NodeM {
   @override
   DeltaM toDelta() {
     final data =
-        _value is EmbeddableM ? (_value as EmbeddableM).toJson() : _value;
+        _value is EmbeddableObjectM ? (_value as EmbeddableObjectM).toJson() : _value;
 
     return DeltaM()..insert(data, style.toJson());
   }
